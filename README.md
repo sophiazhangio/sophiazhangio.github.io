@@ -1,6 +1,6 @@
 # portfolio
 
-Personal site for Songya (Sophia) Zhang: an intro, project cards and a resume download.
+Personal site for Songya (Sophia) Zhang: an intro, project cards and a live design-token panel.
 
 Plain HTML and CSS, no framework and no build step.
 
