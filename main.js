@@ -116,7 +116,7 @@
       entries.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
       });
-    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 });
+    }, { rootMargin: "0px 0px 10% 0px", threshold: 0 });
     revealed.forEach(function (el) { io.observe(el); });
   } else {
     revealed.forEach(function (el) { el.classList.add("is-in"); });
@@ -126,11 +126,13 @@
   if (finePointer.matches && !reduceMotion.matches) {
     var tilt = document.getElementById("tilt");
     var hero = document.querySelector(".hero");
-    var frame = 0;
+    var frame = 0, ev = null;
     hero.addEventListener("pointermove", function (e) {
+      ev = e;
       if (frame) return;
       frame = requestAnimationFrame(function () {
         frame = 0;
+        var e = ev;
         var b = hero.getBoundingClientRect();
         tilt.style.setProperty("--tx", ((e.clientX - b.left) / b.width - 0.5).toFixed(3));
         tilt.style.setProperty("--ty", ((e.clientY - b.top) / b.height - 0.5).toFixed(3));
@@ -142,12 +144,18 @@
     });
 
     // Spotlight on bento tiles
+    var spotFrame = 0, lastEvent = null;
     document.getElementById("bento").addEventListener("pointermove", function (e) {
-      var tile = e.target.closest(".tile");
-      if (!tile) return;
-      var b = tile.getBoundingClientRect();
-      tile.style.setProperty("--mx", e.clientX - b.left + "px");
-      tile.style.setProperty("--my", e.clientY - b.top + "px");
+      lastEvent = e;
+      if (spotFrame) return;
+      spotFrame = requestAnimationFrame(function () {
+        spotFrame = 0;
+        var tile = lastEvent.target.closest(".tile");
+        if (!tile) return;
+        var b = tile.getBoundingClientRect();
+        tile.style.setProperty("--mx", lastEvent.clientX - b.left + "px");
+        tile.style.setProperty("--my", lastEvent.clientY - b.top + "px");
+      });
     });
   }
 
