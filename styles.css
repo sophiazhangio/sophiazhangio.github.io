@@ -261,16 +261,34 @@ a { color: inherit; }
   border-radius: 12px;
 }
 /* Logo: inverted tile, cursor uses the other theme's accent so it reads on the tile */
-.logo { width: 2.25rem; height: 2.25rem; display: block; transition: transform var(--dur-fast) var(--ease-out); }
+/* Phone: the tile logo, always shown */
+.logo { width: 2.25rem; height: 2.25rem; display: block; }
 .logo__tile { fill: var(--color-text); }
 .logo__mark { stroke: var(--color-bg); }
 .logo__cursor { fill: var(--accent-dark); }
 :root[data-theme="dark"] .logo__cursor { fill: var(--accent-light); }
-.nav__brand:hover .logo { transform: rotate(-4deg) scale(1.04); }
-@media (prefers-reduced-motion: no-preference) {
-  .logo__cursor { animation: blink 1.1s steps(1, end) infinite; }
+
+/* Desktop: no tile, and it only shows once the hero name has scrolled away */
+@media (min-width: 40.01rem) {
+  .logo__tile { fill: none; }
+  .logo__mark { stroke: var(--color-text); }
+  .logo__cursor,
+  :root[data-theme="dark"] .logo__cursor { fill: var(--accent); }
 }
-@keyframes blink { 50% { opacity: 0; } }
+@media (min-width: 40.01rem) {
+.js .nav__brand {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity var(--dur-med) var(--ease-out), transform var(--dur-med) var(--ease-out), visibility 0s linear var(--dur-med);
+}
+.js .nav.show-brand .nav__brand {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+}
 .nav__links { display: flex; align-items: center; gap: var(--space-1); }
 .nav__links a:not(.icon-btn) {
   display: inline-flex;

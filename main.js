@@ -106,6 +106,12 @@
     nav.classList.toggle("is-stuck", !entries[0].isIntersecting);
   }).observe(sentinel);
 
+  /* ---------- Show the nav logo once the hero name is off screen ---------- */
+  var heroTitle = document.getElementById("hero-title");
+  new IntersectionObserver(function (entries) {
+    nav.classList.toggle("show-brand", !entries[0].isIntersecting);
+  }, { rootMargin: "-64px 0px 0px 0px" }).observe(heroTitle);
+
   /* ---------- Scroll reveal ---------- */
   var revealed = document.querySelectorAll("[data-reveal]");
   if ("IntersectionObserver" in window && !reduceMotion.matches) {
