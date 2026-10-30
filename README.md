@@ -14,4 +14,4 @@ Plain HTML and CSS, no framework and no build step.
 npx serve .
 ```
 
-Deployed on Vercel as a static site (`vercel.json` only sets headers).
+Live at https://sophiazhangio.github.io, served by GitHub Pages from `main`. Fonts are self-hosted under the SIL Open Font License (`fonts/LICENSE-OFL.txt`); icons are from Phosphor (MIT).
