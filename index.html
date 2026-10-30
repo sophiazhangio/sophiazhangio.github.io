@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-accent="cobalt">
+<html lang="en" data-accent="slate">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,12 +71,12 @@
       <div class="hero__grid-bg" aria-hidden="true"></div>
       <div class="wrap hero__inner">
         <div class="hero__copy">
-          <p class="status"><span class="status__dot" aria-hidden="true"></span>Open to entry-level roles</p>
+          <p class="status"><span class="status__dot" aria-hidden="true"></span>Open to software roles</p>
           <h1 class="hero__title" id="hero-title">
             <span class="line"><span>Sophia</span></span>
             <span class="line"><span>Zhang<span class="hero__dot">.</span></span></span>
           </h1>
-          <p class="hero__lede">Frontend and full-stack engineer building TypeScript and React interfaces with AI coding agents. I own review, tests and release.</p>
+          <p class="hero__lede">Frontend and full-stack engineer. I build with TypeScript, React and AI coding agents.</p>
           <div class="hero__actions">
             <a class="btn btn--primary" href="#work">See my work</a>
             <a class="btn" href="/Songya_Zhang_Resume.pdf">Resume<span class="visually-hidden"> (PDF)</span></a>
@@ -104,7 +104,6 @@
       <div class="wrap">
         <header class="section__head" data-reveal>
           <h2 id="work-title">Selected work</h2>
-          <p>A design-system app, an internship on a live product, and three tools I built to run my own job search.</p>
         </header>
 
         <ul class="bento" id="bento">
@@ -115,10 +114,9 @@
                 <img class="tile__phone" src="/img/split-mobile.webp" width="390" height="844" loading="lazy" decoding="async" alt="The same trip on a phone.">
               </div>
               <div class="tile__body">
-                <p class="tile__meta">Personal project</p>
                 <h3 id="t-split">Split</h3>
                 <p class="tile__tagline">Group trip expense app with its own design system.</p>
-                <p class="tile__text">Split costs evenly, by amount, or item by item from a receipt, then settle up in the fewest payments. I built it for a trip to Chicago and used it there. One token system, mobile-first, keyboard accessible, and money math in integer cents.</p>
+                <p class="tile__text">Split costs item by item from a receipt, then settle up in the fewest payments.</p>
                 <ul class="chips" aria-label="Stack"><li>JavaScript</li><li>CSS tokens</li><li>Firebase</li></ul>
                 <p class="tile__links"><a href="https://split-bofabhang.vercel.app/?demo">Try the demo<span class="visually-hidden"> of Split, no account needed</span><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
               </div>
@@ -131,11 +129,11 @@
                 <img class="tile__img" src="/img/bettascore.webp" width="1280" height="800" loading="lazy" decoding="async" alt="BettaScore home page in dark mode: ranking cards for 3D printers, 3D scanners, coffee machines and electric bikes.">
               </div>
               <div class="tile__body">
-                <p class="tile__meta">Internship at LSEV USA Corp, May 2026 to now</p>
+                <p class="tile__meta">Internship, 2026</p>
                 <h3 id="t-betta">BettaScore</h3>
                 <p class="stat"><span class="stat__num">7.7&nbsp;MB <span class="stat__arrow" aria-hidden="true">→</span><span class="visually-hidden">down to</span> 162&nbsp;KB</span><span class="stat__label">home-page images</span></p>
-                <p class="tile__text">Product rankings built from public reviews, live for 650+ products. I built dark mode, the mobile layout, filters that keep their state, and a release pipeline with test gates.</p>
-                <ul class="chips" aria-label="Stack"><li>Next.js</li><li>TypeScript</li><li>Supabase</li><li>Vercel</li></ul>
+                <p class="tile__text">Product rankings from public reviews. I built dark mode, the mobile layout and release automation.</p>
+                <ul class="chips" aria-label="Stack"><li>Next.js</li><li>TypeScript</li><li>Supabase</li></ul>
                 <p class="tile__links"><a href="https://bettascore.ai">bettascore.ai<svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
               </div>
             </article>
@@ -149,8 +147,7 @@
               <div class="tile__body">
                 <h3 id="t-echo">echolocate</h3>
                 <p class="tile__tagline">Semantic search over ~11,000 job postings.</p>
-                <p class="tile__text">Search by meaning, match a resume, track skill trends and ask questions with cited answers. Runs on a laptop with no paid APIs.</p>
-                <ul class="chips" aria-label="Stack"><li>Python</li><li>Embeddings</li><li>SQLite</li><li>Streamlit</li></ul>
+                <ul class="chips" aria-label="Stack"><li>Python</li><li>Embeddings</li><li>Streamlit</li></ul>
                 <p class="tile__links">
                   <a href="https://echolocate.streamlit.app/">Demo<span class="visually-hidden"> of echolocate</span><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
                   <a href="https://github.com/sophiazhangio/echolocate">Code<span class="visually-hidden"> for echolocate</span><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
@@ -167,7 +164,6 @@
               <div class="tile__body">
                 <h3 id="t-disney">Disneyland Line Planner</h3>
                 <p class="tile__tagline">A* search for the fastest ride order.</p>
-                <p class="tile__text">Finds the order that gets you off your last ride soonest, using walking time and waits that change through the day. The wait-time model is still in progress.</p>
                 <ul class="chips" aria-label="Stack"><li>Python</li><li>FastAPI</li><li>scikit-learn</li></ul>
                 <p class="tile__links"><a href="https://github.com/sophiazhangio/disney-line-planner">Code<span class="visually-hidden"> for Disneyland Line Planner</span><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
               </div>
@@ -179,11 +175,11 @@
               <div class="tile__body tile__body--row">
                 <div>
                   <h3 id="t-radar">job-radar</h3>
-                  <p class="tile__text">A command-line tool that pulls entry-level postings from the public Greenhouse, Ashby and Lever job boards, scores each against a resume, and writes a filterable HTML report. It feeds echolocate.</p>
+                  <p class="tile__text">Pulls relevant jobs from public job boards and ranks them against my resume.</p>
                   <ul class="chips" aria-label="Stack"><li>TypeScript</li><li>Node.js</li></ul>
                   <p class="tile__links"><a href="https://github.com/sophiazhangio/job-radar">Code<span class="visually-hidden"> for job-radar</span><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
                 </div>
-                <p class="stat stat--big"><span class="stat__num">~11k</span><span class="stat__label">postings scanned in about 10 seconds</span></p>
+                <p class="stat stat--big"><span class="stat__num">~11k</span><span class="stat__label">postings per run</span></p>
               </div>
             </article>
           </li>
@@ -196,7 +192,7 @@
       <div class="wrap">
         <header class="section__head" data-reveal>
           <h2 id="system-title">This page runs on tokens</h2>
-          <p>Every color, type size and space here comes from CSS custom properties. Change them below and the whole page follows.</p>
+          <p>Change the theme or accent. The whole page follows.</p>
         </header>
 
         <div class="system" data-reveal>
@@ -212,13 +208,12 @@
             <fieldset>
               <legend>Accent</legend>
               <div class="swatches">
-                <label class="swatch" style="--sw: #2c4bea"><input type="radio" name="accent" value="cobalt"><span class="visually-hidden">Cobalt</span></label>
-                <label class="swatch" style="--sw: #0b7553"><input type="radio" name="accent" value="emerald"><span class="visually-hidden">Emerald</span></label>
-                <label class="swatch" style="--sw: #c2381a"><input type="radio" name="accent" value="tomato"><span class="visually-hidden">Tomato</span></label>
-                <label class="swatch" style="--sw: #8a5000"><input type="radio" name="accent" value="amber"><span class="visually-hidden">Amber</span></label>
+                <label class="swatch" style="--sw: #4f6d96"><input type="radio" name="accent" value="slate"><span class="visually-hidden">Slate blue</span></label>
+                <label class="swatch" style="--sw: #6a8a73"><input type="radio" name="accent" value="sage"><span class="visually-hidden">Sage</span></label>
+                <label class="swatch" style="--sw: #a16d77"><input type="radio" name="accent" value="rose"><span class="visually-hidden">Rose</span></label>
+                <label class="swatch" style="--sw: #55585f"><input type="radio" name="accent" value="graphite"><span class="visually-hidden">Graphite</span></label>
               </div>
             </fieldset>
-            <p class="controls__note">Your choice is saved in this browser. Motion turns off when your system asks for reduced motion.</p>
           </form>
 
           <div class="tokens">
@@ -255,7 +250,6 @@
         <h2 id="contact-title" class="contact__title">Get in touch</h2>
         <a class="contact__mail" href="mailto:sophiazhang03@gmail.com">sophiazhang03@gmail.com<svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <div class="contact__grid">
-          <p>Computer Science, UC Santa Cruz, December 2025. Software engineer intern at BettaScore since May 2026. Based in Orange County, California.</p>
           <div class="contact__actions">
             <a class="btn btn--primary" href="/Songya_Zhang_Resume.pdf" download><svg class="i" aria-hidden="true"><use href="#i-download"/></svg>Download resume<span class="visually-hidden"> (PDF, 200 KB)</span></a>
             <a class="btn" href="https://github.com/sophiazhangio"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg>GitHub</a>

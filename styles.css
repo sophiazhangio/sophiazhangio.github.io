@@ -81,12 +81,12 @@
   --dur-slow: 900ms;
 
   /* accent palettes */
-  --accent-light: #2c4bea;
-  --accent-dark: #8a9dff;
+  --accent-light: #3d5a80;
+  --accent-dark: #a3b8d8;
 }
-:root[data-accent="emerald"] { --accent-light: #0b7553; --accent-dark: #4fd1a1; }
-:root[data-accent="tomato"]  { --accent-light: #c2381a; --accent-dark: #ff8b6e; }
-:root[data-accent="amber"]   { --accent-light: #8a5000; --accent-dark: #f5b14a; }
+:root[data-accent="sage"]     { --accent-light: #4b6a55; --accent-dark: #a8c4ae; }
+:root[data-accent="rose"]     { --accent-light: #85505b; --accent-dark: #d6aab2; }
+:root[data-accent="graphite"] { --accent-light: #3a3d44; --accent-dark: #c9ccd3; }
 
 /* semantic: light */
 :root {
@@ -100,7 +100,7 @@
   --color-muted: var(--gray-600);
   --accent: var(--accent-light);
   --on-accent: var(--gray-0);
-  --accent-wash: color-mix(in oklab, var(--accent) 9%, var(--color-surface));
+  --accent-wash: color-mix(in oklab, var(--accent) 6%, var(--color-surface));
   --accent-line: color-mix(in oklab, var(--accent) 35%, transparent);
   --shadow-1: 0 1px 2px rgb(13 15 20 / 0.06), 0 12px 32px -12px rgb(13 15 20 / 0.18);
   --shadow-2: 0 2px 4px rgb(13 15 20 / 0.06), 0 30px 60px -20px rgb(13 15 20 / 0.32);
@@ -310,9 +310,9 @@ a { color: inherit; }
   content: "";
   position: absolute;
   inset: 10% -10% 0 40%;
-  background: radial-gradient(closest-side, color-mix(in oklab, var(--accent) 22%, transparent), transparent);
+  background: radial-gradient(closest-side, color-mix(in oklab, var(--accent) 14%, transparent), transparent);
   filter: blur(30px);
-  opacity: 0.7;
+  opacity: 0.6;
 }
 .hero__inner {
   display: grid;
@@ -342,7 +342,7 @@ a { color: inherit; }
   height: 0.5rem;
   margin-left: var(--space-1);
   border-radius: 50%;
-  background: #1f9d55;
+  background: #3f9a68;
 }
 .status__dot::after {
   content: "";
@@ -450,7 +450,7 @@ a { color: inherit; }
   z-index: 2;
   pointer-events: none;
   border-radius: inherit;
-  background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 0%), color-mix(in oklab, var(--accent) 13%, transparent), transparent 45%);
+  background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 0%), color-mix(in oklab, var(--accent) 9%, transparent), transparent 45%);
   opacity: 0;
   transition: opacity var(--dur-med);
 }
@@ -591,6 +591,7 @@ a { color: inherit; }
 
 .swatches { display: flex; gap: var(--space-3); }
 .swatch { position: relative; display: block; width: 2.75rem; height: 2.75rem; }
+.swatch::before { inset: 0.4rem !important; }
 .swatch input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
 .swatch::before {
   content: "";
@@ -684,9 +685,7 @@ a { color: inherit; }
 }
 .contact__grid p { color: var(--color-muted); max-width: 44ch; }
 .contact__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
-@media (min-width: 52rem) {
-  .contact__grid { grid-template-columns: 1fr auto; align-items: center; }
-}
+
 
 .footer { border-top: 1px solid var(--color-border); padding-block: var(--space-5); font-size: var(--text-sm); color: var(--color-muted); }
 .footer__inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-2) var(--space-5); }

@@ -17,7 +17,7 @@
   function syncControls() {
     var saved = read("theme") || "system";
     themeRadios.forEach(function (r) { r.checked = r.value === saved; });
-    accentRadios.forEach(function (r) { r.checked = r.value === (root.dataset.accent || "cobalt"); });
+    accentRadios.forEach(function (r) { r.checked = r.value === (root.dataset.accent || "slate"); });
     var next = root.dataset.theme === "dark" ? "light" : "dark";
     toggle.setAttribute("aria-label", "Switch to " + next + " theme");
     renderTokens();
@@ -63,7 +63,7 @@
   accentRadios.forEach(function (r) {
     r.addEventListener("change", function () {
       var c = centerOf(r.parentElement);
-      write("accent", r.value === "cobalt" ? null : r.value);
+      write("accent", r.value === "slate" ? null : r.value);
       withTransition(function () { root.dataset.accent = r.value; }, c[0], c[1]);
     });
   });
