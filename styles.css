@@ -4,7 +4,7 @@
 /* Handwriting, subset to lowercase letters */
 @font-face {
   font-family: "Caveat";
-  src: url("/fonts/caveat-label.woff2") format("woff2");
+  src: url("/fonts/caveat-lower.woff2") format("woff2");
   font-weight: 700;
   font-display: swap;
 }
@@ -684,7 +684,9 @@ a { color: inherit; }
 ================================================================== */
 .about { display: grid; gap: var(--space-6); align-items: center; }
 @media (min-width: 40rem) {
-  .about { grid-template-columns: minmax(0, 26rem) minmax(0, 1fr); gap: var(--space-7); }
+  /* Off-balance on purpose: photo sits high, info starts lower */
+  .about { grid-template-columns: minmax(0, 26rem) minmax(0, 1fr); gap: var(--space-7); align-items: start; }
+  .about__copy { margin-top: var(--space-8); }
 }
 .about__photo {
   margin: 0;
