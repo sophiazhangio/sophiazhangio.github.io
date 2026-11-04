@@ -2,20 +2,8 @@
    Fonts (self-hosted, SIL Open Font License)
 ================================================================== */
 @font-face {
-  font-family: "Bricolage Grotesque";
-  src: url("/fonts/bricolage.woff2") format("woff2");
-  font-weight: 200 800;
-  font-display: swap;
-}
-@font-face {
   font-family: "Geist";
   src: url("/fonts/geist.woff2") format("woff2");
-  font-weight: 100 900;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Geist Mono";
-  src: url("/fonts/geist-mono.woff2") format("woff2");
   font-weight: 100 900;
   font-display: swap;
 }
@@ -43,9 +31,9 @@
   --night-800: #c9cdd6;
   --night-950: #eef0f4;
 
-  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sans);
   --font-sans: "Geist", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-mono: var(--font-sans);
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -252,6 +240,7 @@ a { color: inherit; }
   transition: border-color var(--dur-med);
 }
 .nav.is-stuck { border-bottom-color: var(--color-border); }
+.nav__progress { display: none; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--accent); transform-origin: 0 50%; }
 .nav__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
 .nav__brand {
   display: inline-grid;
@@ -396,6 +385,22 @@ a { color: inherit; }
 .hero__icons { display: inline-flex; gap: var(--space-2); }
 @media (min-width: 30rem) { .hero__icons { margin-left: var(--space-2); } }
 
+/* Accent picker: same radios as the token panel, so they stay in sync */
+.hero__try {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--space-3);
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  border: 0;
+}
+.hero__try legend { float: left; padding: 0; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); }
+.swatches--sm { gap: 0; }
+.swatches--sm .swatch::before { inset: 0.75rem !important; }
+.hero__try-link { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); text-underline-offset: 0.25em; }
+.hero__try-link:hover { color: var(--accent); }
+
 /* Screenshot stack */
 .stage {
   perspective: 1400px;
@@ -421,10 +426,10 @@ a { color: inherit; }
   box-shadow: var(--shadow-2);
   background: var(--color-surface);
 }
-.shot--back-l { left: 0; top: 4%; transform: translateZ(-90px) rotate(-5deg); opacity: 0.92; }
-.shot--back-r { right: 0; top: 16%; transform: translateZ(-50px) rotate(4deg); opacity: 0.95; }
-.shot--front { left: 11%; top: 32%; transform: translateZ(30px); }
-.shot--phone { width: 22%; right: 3%; top: 38%; border-radius: 18px; transform: translateZ(90px) rotate(3deg); }
+.shot--back-l { left: 0; top: 4%; transform: translate(0, 0) translateZ(-90px) rotate(-5deg); opacity: 0.92; }
+.shot--back-r { right: 0; top: 16%; transform: translate(0, 0) translateZ(-50px) rotate(4deg); opacity: 0.95; }
+.shot--front { left: 11%; top: 32%; transform: translate(0, 0) translateZ(30px) scale(1); }
+.shot--phone { width: 22%; right: 3%; top: 38%; border-radius: 18px; transform: translate(0, 0) translateZ(90px) rotate(3deg); }
 
 /* ==================================================================
    Sections
@@ -465,11 +470,16 @@ a { color: inherit; }
 .tile::before {
   content: "";
   position: absolute;
-  inset: 0;
+  left: 0;
+  top: 0;
+  width: 468px;
+  height: 468px;
   z-index: 2;
   pointer-events: none;
-  border-radius: inherit;
-  background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 0%), color-mix(in oklab, var(--accent) 9%, transparent), transparent 45%);
+  background: radial-gradient(closest-side, color-mix(in oklab, var(--accent) 9%, transparent), transparent);
+  /* Moved with transform, so following the pointer doesn't repaint the tile */
+  transform: translate(calc(var(--mx, 0px) - 234px), calc(var(--my, 0px) - 234px));
+  will-change: transform;
   opacity: 0;
   transition: opacity var(--dur-med);
 }
@@ -652,7 +662,6 @@ a { color: inherit; }
 .ts--display { font-family: var(--font-display); font-size: 3rem; font-weight: 700; letter-spacing: -0.05em; }
 .ts--h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 650; }
 .ts--body { font-size: 1.5rem; }
-.ts--mono { font-family: var(--font-mono); font-size: 1.5rem; }
 
 .tokens__space { display: flex; align-items: flex-end; gap: var(--space-3); border-top: 1px solid var(--color-border); padding-top: var(--space-5); }
 .tokens__space span {
@@ -691,6 +700,7 @@ a { color: inherit; }
 }
 .about__photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
 .about__copy h2 { font-size: var(--text-2xl); }
+.about__copy h2.visually-hidden + .facts { margin-top: 0; }
 .about__copy > p { margin-top: var(--space-4); color: var(--color-muted); max-width: var(--measure); }
 .about__copy > .about__lede { margin-top: var(--space-5); font-size: var(--text-lg); color: var(--color-soft); font-weight: 500; }
 .facts {
@@ -780,6 +790,7 @@ a { color: inherit; }
   .js .status, .js .hero__lede, .js .hero__actions { animation: fade-up 450ms var(--ease-out) both; }
   .js .hero__lede { animation-delay: 120ms; }
   .js .hero__actions { animation-delay: 180ms; }
+  .js .hero__try { animation: fade-up 450ms var(--ease-out) 240ms both; }
 
   /* Screenshots deal in one by one */
   .js .shot { animation: deal 650ms var(--ease-out) both; }
@@ -800,6 +811,31 @@ a { color: inherit; }
   }
   .js [data-reveal].is-in { opacity: 1; transform: none; }
 }
+
+/* Scroll-driven effects. Browsers without scroll timelines keep the static layout. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Hero screenshots fan out as the page scrolls */
+    .js .shot--back-l { animation: deal 650ms var(--ease-out) 60ms both, spread-bl linear both; }
+    .js .shot--back-r { animation: deal 650ms var(--ease-out) 120ms both, spread-br linear both; }
+    .js .shot--front { animation: deal 650ms var(--ease-out) 180ms both, spread-front linear both; }
+    .js .shot--phone { animation: deal 650ms var(--ease-out) 240ms both, spread-phone linear both; }
+    /* After the shorthands above, which would reset it */
+    .js .shot { animation-timeline: auto, scroll(root); animation-range: normal, 0 70vh; }
+    /* Project screenshots rise into their frames. The timeline is the tile's
+       place on the page (the stage clips, so it can't be the image's own). */
+    .tile { view-timeline: --tile block; }
+    .tile__img, .tile__phone { animation: rise-in linear both; animation-timeline: --tile; animation-range: entry 0% cover 40%; }
+    /* Reading progress under the nav, in the current accent */
+    .nav__progress { display: block; animation: progress linear both; animation-timeline: scroll(root); }
+  }
+}
+@keyframes spread-bl { to { transform: translate(-14%, -6%) translateZ(-90px) rotate(-10deg); } }
+@keyframes spread-br { to { transform: translate(14%, -10%) translateZ(-50px) rotate(9deg); } }
+@keyframes spread-front { to { transform: translate(0, 10%) translateZ(30px) scale(1.04); } }
+@keyframes spread-phone { to { transform: translate(20%, -16%) translateZ(90px) rotate(10deg); } }
+@keyframes rise-in { from { translate: 0 40px; } to { translate: 0 0; } }
+@keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 @keyframes rise { from { transform: translateY(105%); } to { transform: translateY(0); } }
 @keyframes fade-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
