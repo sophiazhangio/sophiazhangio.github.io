@@ -1,6 +1,13 @@
 /* ==================================================================
    Fonts (self-hosted, SIL Open Font License)
 ================================================================== */
+/* Handwriting, subset to lowercase letters */
+@font-face {
+  font-family: "Caveat";
+  src: url("/fonts/caveat-label.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
 @font-face {
   font-family: "Geist";
   src: url("/fonts/geist.woff2") format("woff2");
@@ -17,19 +24,20 @@
 :root {
   /* primitives */
   --gray-0: #fbfbfc;
-  --gray-50: #f2f3f5;
-  --gray-100: #e9ebef;
-  --gray-200: #dcdfe5;
+  --gray-25: #f7f6f2;
+  --gray-50: #edece8;
+  --gray-100: #e4e2dd;
+  --gray-200: #d8d5cf;
   --gray-600: #555b67;
   --gray-800: #2b2f38;
-  --gray-950: #0d0f14;
+  --gray-950: #1a1c21;
   --night-0: #0a0b0e;
   --night-50: #121419;
   --night-100: #1a1d24;
   --night-200: #272b34;
   --night-600: #9aa0ae;
-  --night-800: #c9cdd6;
-  --night-950: #eef0f4;
+  --night-800: #b9bdc6;
+  --night-950: #d9dce2;
 
   --font-display: var(--font-sans);
   --font-sans: "Geist", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -80,7 +88,7 @@
 :root {
   color-scheme: light;
   --color-bg: var(--gray-50);
-  --color-surface: var(--gray-0);
+  --color-surface: var(--gray-25);
   --color-surface-2: var(--gray-100);
   --color-border: var(--gray-200);
   --color-text: var(--gray-950);
@@ -240,7 +248,6 @@ a { color: inherit; }
   transition: border-color var(--dur-med);
 }
 .nav.is-stuck { border-bottom-color: var(--color-border); }
-.nav__progress { display: none; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--accent); transform-origin: 0 50%; }
 .nav__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
 .nav__brand {
   display: inline-grid;
@@ -249,21 +256,11 @@ a { color: inherit; }
   min-height: 2.75rem;
   border-radius: 12px;
 }
-/* Logo: inverted tile, cursor uses the other theme's accent so it reads on the tile */
-/* Phone: the tile logo, always shown */
+/* Logo: S and Z overlap; the Z takes the accent, and where they cross the two colors mix */
 .logo { width: 2.25rem; height: 2.25rem; display: block; }
-.logo__tile { fill: var(--color-text); }
-.logo__mark { stroke: var(--color-bg); }
-.logo__cursor { fill: var(--accent-dark); }
-:root[data-theme="dark"] .logo__cursor { fill: var(--accent-light); }
-
-/* Desktop: no tile, and it only shows once the hero name has scrolled away */
-@media (min-width: 40.01rem) {
-  .logo__tile { fill: none; }
-  .logo__mark { stroke: var(--color-text); }
-  .logo__cursor,
-  :root[data-theme="dark"] .logo__cursor { fill: var(--accent); }
-}
+.logo__s { fill: var(--color-text); }
+.logo__z { fill: var(--accent); }
+.logo__mix { fill: color-mix(in oklab, var(--accent) 50%, var(--color-text)); }
 @media (min-width: 40.01rem) {
 .js .nav__brand {
   opacity: 0;
@@ -686,8 +683,8 @@ a { color: inherit; }
    About
 ================================================================== */
 .about { display: grid; gap: var(--space-6); align-items: center; }
-@media (min-width: 52rem) {
-  .about { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-8); }
+@media (min-width: 40rem) {
+  .about { grid-template-columns: minmax(0, 26rem) minmax(0, 1fr); gap: var(--space-7); }
 }
 .about__photo {
   margin: 0;
@@ -699,8 +696,31 @@ a { color: inherit; }
   box-shadow: var(--shadow-1);
 }
 .about__photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+
+/* Middle widths: info beside the photo, Toolbox full width below */
+@media (min-width: 40rem) and (max-width: 51.99rem) {
+  .about { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-7) var(--space-6); }
+  .about__copy { display: contents; }
+  .about .facts { grid-column: 2; grid-template-columns: minmax(0, 1fr); }
+  .about .toolbox { grid-column: 1 / -1; margin-top: 0; }
+}
 .about__copy h2 { font-size: var(--text-2xl); }
-.about__copy h2.visually-hidden + .facts { margin-top: 0; }
+.about__copy > .facts:first-child { margin-top: 0; }
+
+/* Handwritten title with an arrow curving toward the info */
+.about__head { display: flex; align-items: flex-start; gap: var(--space-4); margin-bottom: var(--space-5); }
+.about__head h2 {
+  font-family: "Caveat", var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(3rem, 2.2rem + 3vw, 4.5rem);
+  letter-spacing: 0;
+  line-height: 1;
+  rotate: -3deg;
+  transform-origin: left bottom;
+}
+/* Arrow points right, at the info column; hidden when the info sits under the photo */
+.about__arrow { display: none; width: clamp(9rem, 4rem + 10vw, 13rem); height: auto; margin-top: 0.35em; color: var(--accent); flex: none; transform-origin: 0 50%; }
+@media (min-width: 40rem) { .about__arrow { display: block; } }
 .about__copy > p { margin-top: var(--space-4); color: var(--color-muted); max-width: var(--measure); }
 .about__copy > .about__lede { margin-top: var(--space-5); font-size: var(--text-lg); color: var(--color-soft); font-weight: 500; }
 .facts {
@@ -714,31 +734,33 @@ a { color: inherit; }
 .facts dt { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); }
 .facts dd { margin: var(--space-1) 0 0; color: var(--color-text); }
 
-/* Toolbox: monochrome logos that take the accent on hover */
+/* Toolbox: borderless monochrome logos that take the accent on hover */
 .toolbox { margin-top: var(--space-6); }
 .toolbox__title { font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 400; letter-spacing: 0; color: var(--color-muted); }
 .toolbox__grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-2);
-  margin-top: var(--space-3);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-4) var(--space-2);
+  margin-top: var(--space-4);
 }
 .toolbox__grid li {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-2);
-  padding: var(--space-3) var(--space-1);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
+  padding: var(--space-2) 0;
   color: var(--color-soft);
-  transition: color var(--dur-fast), border-color var(--dur-fast), transform var(--dur-med) var(--ease-out);
+  transition: color var(--dur-fast);
 }
-@media (min-width: 52rem) { .toolbox__grid { grid-template-columns: repeat(7, minmax(0, 1fr)); } }
-.toolbox__grid svg { width: 1.6rem; height: 1.6rem; }
-.toolbox__grid span { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--color-muted); text-align: center; line-height: 1.2; }
-.toolbox__grid li:hover { color: var(--accent); border-color: var(--accent-line); transform: translateY(-2px); }
+.toolbox__grid svg {
+  width: 2rem;
+  height: 2rem;
+  transition: scale var(--dur-med) var(--ease-out);
+}
+.toolbox__grid span { font-size: 0.6875rem; color: var(--color-muted); text-align: center; line-height: 1.2; transition: color var(--dur-fast); }
+.toolbox__grid li:hover { color: var(--accent); }
+.toolbox__grid li:hover svg { scale: 1.12; }
+.toolbox__grid li:hover span { color: var(--color-text); }
 
 /* ==================================================================
    Contact
@@ -810,6 +832,14 @@ a { color: inherit; }
     transition-delay: calc(var(--i, 0) * 50ms);
   }
   .js [data-reveal].is-in { opacity: 1; transform: none; }
+
+  /* The About title writes in, then the arrow draws itself (once) */
+  .js .about__head h2 { clip-path: inset(-20% 100% -20% 0); transition: clip-path 700ms var(--ease-out); }
+  .js .about__arrow path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 550ms var(--ease-out) 650ms; }
+  .js .about__arrow .about__arrow-head { transition-duration: 220ms; transition-delay: 1150ms; }
+  .js .about__head.is-in h2 { clip-path: inset(-20% -10% -20% 0); }
+  .js .about__head.is-in .about__arrow path { stroke-dashoffset: 0; }
+
 }
 
 /* Scroll-driven effects. Browsers without scroll timelines keep the static layout. */
@@ -824,18 +854,26 @@ a { color: inherit; }
     .js .shot { animation-timeline: auto, scroll(root); animation-range: normal, 0 70vh; }
     /* Project screenshots rise into their frames. The timeline is the tile's
        place on the page (the stage clips, so it can't be the image's own). */
+    /* "about me" sways and drifts as the section scrolls past; the arrow follows */
+    .about__head { animation: about-drift linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
+    .about__head h2 { animation: about-tilt linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
+    .about__arrow { animation: arrow-tilt linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
     .tile { view-timeline: --tile block; }
     .tile__img, .tile__phone { animation: rise-in linear both; animation-timeline: --tile; animation-range: entry 0% cover 40%; }
-    /* Reading progress under the nav, in the current accent */
-    .nav__progress { display: block; animation: progress linear both; animation-timeline: scroll(root); }
-  }
+      }
 }
 @keyframes spread-bl { to { transform: translate(-14%, -6%) translateZ(-90px) rotate(-10deg); } }
 @keyframes spread-br { to { transform: translate(14%, -10%) translateZ(-50px) rotate(9deg); } }
 @keyframes spread-front { to { transform: translate(0, 10%) translateZ(30px) scale(1.04); } }
 @keyframes spread-phone { to { transform: translate(20%, -16%) translateZ(90px) rotate(10deg); } }
+@keyframes about-drift {
+  from { translate: -2.5rem 0.75rem; }
+  50%  { translate: 0 0; }
+  to   { translate: 1.5rem -0.5rem; }
+}
+@keyframes about-tilt { from { rotate: -8deg; } 50% { rotate: -3deg; } to { rotate: 2deg; } }
+@keyframes arrow-tilt { from { rotate: -5deg; } 50% { rotate: 0deg; } to { rotate: 5deg; } }
 @keyframes rise-in { from { translate: 0 40px; } to { translate: 0 0; } }
-@keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 @keyframes rise { from { transform: translateY(105%); } to { transform: translateY(0); } }
 @keyframes fade-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
