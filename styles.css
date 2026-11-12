@@ -705,6 +705,13 @@ a { color: inherit; }
 }
 .about__photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
 
+/* Wide screens: photo starts high and runs down to the last Toolbox row */
+@media (min-width: 52rem) {
+  .about { align-items: stretch; }
+  .about__photo { position: relative; min-height: 24rem; }
+  .about__photo img { position: absolute; inset: 0; height: 100%; aspect-ratio: auto; }
+}
+
 /* Middle widths: info beside the photo, Toolbox full width below */
 @media (min-width: 40rem) and (max-width: 51.99rem) {
   .about { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-7) var(--space-6); }
